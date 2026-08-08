@@ -1,0 +1,25 @@
+[package]
+name = "ms-even6"
+version = "0.1.0-dev"
+edition = "2021"
+rust-version = "1.74"
+authors = ["zevs"]
+description = "Pure-Rust MS-EVEN6 EventLog Remoting Protocol v6 client: open channel, register XPath query, pull events, and decode BinXml event fragments. Rides dcerpc's named-pipe transport (\\pipe\\eventlog)."
+license = "MIT"
+repository = "https://github.com/icedracon/ms-even6"
+readme = "README.md"
+keywords = ["msrpc", "eventlog", "even6", "binxml", "windows"]
+categories = ["network-programming", "parser-implementations", "os::windows-apis"]
+
+[dependencies]
+ms-ndr = { path = "../ms-ndr", version = "0.1" }
+thiserror = "2"
+
+# NOTE: dcerpc (path = "../dcerpc", version = "0.2") is the intended MS-RPCE
+# transport for a live-DC driver — it will be re-added behind a `dcerpc-transport`
+# feature in 0.2.0 once the async→sync adapter for `SmbPipe` is in place. For
+# 0.1.0-dev the crate uses its own thin `Syntax` type and a sync `Transport`
+# trait so the skeleton stays hashglass-light (no tokio / ntlmssp / crypto tree).
+
+[badges]
+maintenance = { status = "experimental" }
